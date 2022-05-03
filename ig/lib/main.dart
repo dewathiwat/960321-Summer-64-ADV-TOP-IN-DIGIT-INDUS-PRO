@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,11 +28,7 @@ class _HomeState extends State<Home> {
   TextEditingController result = TextEditingController();
   TextEditingController result2 = TextEditingController();
   TextEditingController price = TextEditingController();
-  static const Icon facebook = Icon(
-      Icons.audiotrack,
-      color: Colors.green,
-      size: 30.0,
-    );
+  static const Icon facebook = Icon(FontAwesomeIcons.facebook, size: 16.0);
 
   @override
   void initState() {
@@ -101,7 +98,11 @@ class _HomeState extends State<Home> {
                 SizedBox(height: 16,),
                 Text("------------------------------  OR  ------------------------------",style: TextStyle(color: Colors.grey),),
                 SizedBox(height: 16,),
-                Text("Log in wiht Facebook"
+                Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   children: [
+                     Icon(FontAwesomeIcons.facebookSquare,color:Color.fromARGB(255, 1, 58, 105) ,size: 16.0),
+                     Text(" Log in wiht Facebook"
                   ,
                   style: TextStyle(
                     fontFamily: "maaja",
@@ -110,7 +111,9 @@ class _HomeState extends State<Home> {
                     
                     
                   ),
-                ),
+                )],
+                  ),
+                
                 SizedBox(height: 16,),
                 Text("Forgot password?",
                     style: TextStyle(
