@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:secondapp/pages/DetailPage.dart';
 
@@ -17,24 +19,24 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: ListView(children: [
-          MyBox("What is a computer ?",
-          "Computer is athing to calculate and of any other works",
-          "https://cdn.pixabay.com/photo/2021/08/31/11/59/androgynous-6588615_960_720.jpg"),
-          SizedBox(height: 20,),
-          MyBox("What is  Flutter ?","Flutter is a tool to create a mobile application","https://cdn.pixabay.com/photo/2021/08/31/12/00/androgynous-6588618_960_720.jpg"),
-          SizedBox(height: 20,),
-          MyBox("What is Dart ?","Dart is the language used in Flutter","https://cdn.pixabay.com/photo/2021/08/31/11/58/woman-6588614_960_720.jpg"),
-          SizedBox(height: 20,),
-        ],),
+        child: FutureBuilder(
+          builder: (context, snapshot) {
+            var data = json.decode(snapshot.data.toString());
+            return ListView.builder(itemBuilder: (BuildContext context,int  index) {
+              return MyBox(data[index]["title"], data[index]["subtitle"], data[index]["image_url"],data[index]["detail"]);
+            },
+            itemCount: data.length,);
+        },
+        future: DefaultAssetBundle.of(context).loadString("assets/data.json"),),
       ),
     );
   }
 
-  Widget MyBox(String title ,String subTitle,String img){
+  Widget MyBox(String title ,String subTitle,String img,String detail){
     return Container(
+      margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.all(20),
-      height: 150,
+      height: 180,
       decoration: BoxDecoration(
         color: Colors.grey,
         borderRadius:  BorderRadius.circular(20),
@@ -55,7 +57,15 @@ class _HomePageState extends State<HomePage> {
         ),
         SizedBox(height: 5,),
         Text(subTitle, style: TextStyle(fontSize: 12,color: Colors.white),),
-        SizedBox(height: 15,),
+        SizedBox(height: 5,),
+        Text(detail,
+        style: TextStyle(
+          fontSize: 14,
+          color: Colors.white,
+          fontWeight: FontWeight.bold
+          ),
+        ),
+        SizedBox(height: 5,),
         TextButton(
           onPressed: () {
           print("nect page >>");

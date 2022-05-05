@@ -1,0 +1,26 @@
+[
+    {
+        "title":"What is a computer ?",
+        "subtitle":"Computer is athing to calculate and of any other works",
+        "image_url":"https://www.dankrevolutionstore.com/wp-content/uploads/2020/04/WEDDING-CAKE-300x300.jpg",
+        "detail":"Detail"
+    },
+    {
+        "title":"What is  Flutter ?",
+        "subtitle":"lutter is a tool to create a mobile application",
+        "image_url":"https://euro420buds.com/wp-content/uploads/2017/10/Pura-Vida-Strain-300x300.jpg",
+        "detail":"Detail"
+    },
+    {
+        "title":"What is Dart ?",
+        "subtitle":"Dart is the language used in Flutter",
+        "image_url":"https://www.canadamushrooms.ca/wp-content/uploads/2021/06/Violator-Kush-300x300.jpg",
+        "detail":"Detail"
+    },
+    {
+        "title":"What is Dart ?",
+        "subtitle":"Dart is the language used in Flutter",
+        "image_url":"https://askgrowers.com/uploads/2020/09/Banana-Sherbet-2.webp",
+        "detail":"Detail"
+    }
+]
