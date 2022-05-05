@@ -1,3 +1,6 @@
+import 'package:app2/pages/ContactPage.dart';
+import 'package:app2/pages/HomePage.dart';
+import 'package:app2/pages/calc.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,126 +13,42 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text("การเดินทางขากลับคงจะเหงา",style: TextStyle(
-                    fontFamily: "maaja", fontSize: 30) ,),
-                    backgroundColor: Colors.black,
-          ),
-          body: Home()),
+      home: MainPage(),
     );
   }
 }
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class MainPage extends StatefulWidget {
+  const MainPage({ Key? key }) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _HomeState extends State<Home> {
-  TextEditingController quantity = TextEditingController();
-  TextEditingController result = TextEditingController();
-  TextEditingController result2 = TextEditingController();
-  TextEditingController price = TextEditingController();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    result.text = "Buy x Apples, x THB per an Apple.";
-    result2.text = "You have to pay x THB.";
-  }
+class _MainPageState extends State<MainPage> {
+int _currentIndex = 0;
+final tabs = [HomePage(),CalculatePage(),ContactPage()];
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(50.0),
-          child: Center(
-            child: Column(
-              children: [
-                Text(""),
-                Image.asset(
-                  "assets/257791.png",
-                  width: 160,
-                ),
-                SizedBox(height: 16,),
-                Text(
-                  "Calculate Program",
-                  style: TextStyle(
-                    fontFamily: "maaja",
-                    fontSize: 48,
-                  ),
-                ),
-                SizedBox(height: 16,),
-                TextField(
-                  controller: quantity,
-                  decoration: InputDecoration(
-                    labelText: "Apple Amount",
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black))
-                  ),
-                  style: TextStyle(
-                    fontFamily: "maaja",
-                    fontSize: 24,
-                  ),
-                ),
-                SizedBox(height: 16,),
-                TextField(
-                  controller: price,
-                  decoration: InputDecoration(
-                    labelText: "Apple Price",
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black))
-                  ),
-                  style: TextStyle(
-                    fontFamily: "maaja",
-                    fontSize: 24,
-                  ),
-                ),
-                SizedBox(height: 16,),
-                ElevatedButton(
-                    onPressed: () { 
-                      var pi = price.text;
-                      var cal = double.parse(quantity.text)*double.parse(pi);
-                     
-                      print("Apple quality: ${quantity.text} Total: ${cal} THB");
-
-                      setState(() {
-                        result.text = "Buy ${quantity.text} Apples, ${price.text} THB per an Apple.";
-                        result2.text = "You have to pay ${cal} THB.";
-                      });
-                    },
-                    child: Text(
-                      "Calculate",
-                      style: TextStyle(
-                        fontFamily: "maaja",
-                        fontSize: 16,
-                      ),
-                      
-                    ),
-                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)),),
-                SizedBox(height: 16,),
-                Text(result.text
-                  ,
-                  style: TextStyle(
-                    fontFamily: "maaja",
-                    fontSize: 24,
-                  ),
-                ),
-                Text(result2.text,
-                    style: TextStyle(
-                      fontFamily: "maaja",
-                      fontSize: 24,
-                    ))
-              ],
-            ),
-          ),
-        ),
-      ],
+    return Scaffold(
+      body: tabs[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home),label: "HomePage"),
+          BottomNavigationBarItem(icon: Icon(Icons.calculate),label: "Calculate"),
+          BottomNavigationBarItem(icon: Icon(Icons.contact_mail),label: "Contact")
+        ],
+        onTap: (index){
+          setState(() {
+            print(index);
+            _currentIndex = index;
+          });
+        },
+      ),
     );
   }
 }
+
+

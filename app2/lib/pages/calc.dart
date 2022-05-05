@@ -1,43 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class CalculatePage extends StatefulWidget {
+  const CalculatePage({ Key? key }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          body: Home()),
-    );
-  }
+  State<CalculatePage> createState() => _CalculatePageState();
 }
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
+class _CalculatePageState extends State<CalculatePage> {
   TextEditingController quantity = TextEditingController();
   TextEditingController result = TextEditingController();
   TextEditingController result2 = TextEditingController();
   TextEditingController price = TextEditingController();
-  static const Icon facebook = Icon(FontAwesomeIcons.facebook, size: 16.0);
 
-  @override
+   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     result.text = "Buy x Apples, x THB per an Apple.";
     result2.text = "You have to pay x THB.";
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -48,81 +31,79 @@ class _HomeState extends State<Home> {
             child: Column(
               children: [
                 Text(""),
+                Image.asset(
+                  "assets/257791.png",
+                  width: 160,
+                ),
                 SizedBox(height: 16,),
                 Text(
-                  "Instargram",
+                  "Calculate Program",
                   style: TextStyle(
-                    fontFamily: "VeganStyle",
+                    fontFamily: "maaja",
                     fontSize: 48,
                   ),
                 ),
-                SizedBox(height: 32,),
+                SizedBox(height: 16,),
                 TextField(
                   controller: quantity,
                   decoration: InputDecoration(
-                    labelText: "Phone number, username, or email",
+                    labelText: "Apple Amount",
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black))
                   ),
                   style: TextStyle(
                     fontFamily: "maaja",
-                    fontSize: 14,
+                    fontSize: 24,
                   ),
                 ),
                 SizedBox(height: 16,),
                 TextField(
                   controller: price,
                   decoration: InputDecoration(
-                    labelText: "Password",
+                    labelText: "Apple Price",
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black))
                   ),
                   style: TextStyle(
                     fontFamily: "maaja",
-                    fontSize: 16,
+                    fontSize: 24,
                   ),
                 ),
                 SizedBox(height: 16,),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () { 
+                      var pi = price.text;
+                      var cal = double.parse(quantity.text)*double.parse(pi);
+                     
+                      print("Apple quality: ${quantity.text} Total: ${cal} THB");
+
+                      setState(() {
+                        result.text = "Buy ${quantity.text} Apples, ${price.text} THB per an Apple.";
+                        result2.text = "You have to pay ${cal} THB.";
+                      });
+                    },
                     child: Text(
-                      "Log In",
+                      "Calculate",
                       style: TextStyle(
                         fontFamily: "maaja",
-                        fontSize: 14,
+                        fontSize: 16,
                       ),
                       
                     ),
-                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 158, 216, 243)),
-                                      padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(120, 10, 120, 10))),),
+                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)),),
                 SizedBox(height: 16,),
-                Text("------------------------------  OR  ------------------------------",style: TextStyle(color: Colors.grey),),
-                SizedBox(height: 16,),
-                Row(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                   children: [
-                     Icon(FontAwesomeIcons.facebookSquare,color:Color.fromARGB(255, 1, 58, 105) ,size: 16.0),
-                     Text(" Log in wiht Facebook"
+                Text(result.text
                   ,
                   style: TextStyle(
                     fontFamily: "maaja",
-                    fontSize: 14,
-                    color: Color.fromARGB(255, 1, 58, 105),
-                    
-                    
+                    fontSize: 24,
                   ),
-                )],
-                  ),
-                
-                SizedBox(height: 16,),
-                Text("Forgot password?",
+                ),
+                Text(result2.text,
                     style: TextStyle(
                       fontFamily: "maaja",
-                      fontSize: 14,
-                    )),
-                     SizedBox(height: 16,),
-                Text("--------------------------------------------------------------------------",style: TextStyle(color: Colors.grey),),
-                
+                      fontSize: 24,
+                    ))
               ],
             ),
           ),
