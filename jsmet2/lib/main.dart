@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -56,13 +56,13 @@ List<Photo> parsePhotos(String responseBody) {
 
 Future<List<Photo>> fetchPhotos(http.Client client) async {
   final response = await client
-      .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
+      .get(Uri.parse('7'));
 
   // Use the compute function to run parsePhotos in a separate isolate.
   print("response.body: ${response.body}");
   print("parsePhotos = ${parsePhotos}");
-  print("compute(parsePhotos, response.body) = ${compute(parsePhotos, response.body)}");
-  return compute(parsePhotos, response.body);
+  print("compute(parsePhotos, response.body) = ${parsePhotos(response.body)}");
+  return parsePhotos(response.body);
 }
 
 class MyHomePage extends StatefulWidget {
@@ -94,8 +94,9 @@ class _MyHomePageState extends State<MyHomePage> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: Text(snapshot.data![index].title),
-                );
+                  leading: Image.network(snapshot.data![index].thumbnailUrl),
+                  title: Text(snapshot.data![index].title),
+                  );
               }
             );
           } else {
