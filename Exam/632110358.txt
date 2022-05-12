@@ -1,0 +1,14 @@
+component
+1.body
+2.header
+3.recommend
+4.card
+
+ knowledge that you used to implement the following UI 
+ 1 . list view
+ 2. container 
+ 3. row
+ 4. column
+ 5 . imagenetwork
+ 6. padding margin icon 
+ 7.bottomNavigationBar
